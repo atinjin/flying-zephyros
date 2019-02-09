@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.atinjin.lib.SimplePost"
+    mainClassName = "com.atinjin.zephyros.Zephyros"
 }
 
 dependencies {
