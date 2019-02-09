@@ -1,0 +1,59 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.3.20'
+        kotlinCoroutine = '1.1.1'
+        arrowVersion = '0.8.2'
+        jacksonVersion = '2.9.0'
+        detektVersion = '1.0.0-RC12'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detektVersion}")
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'java'
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+project.description = 'Simple PostOffice, Messaging Executor service'
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    //Kotlin
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: "${kotlinVersion}"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: "${kotlinVersion}"
+    compile group: 'io.github.microutils', name: 'kotlin-logging', version: '1.6.20'
+    
+    //Functional Programming
+    compile group: 'io.arrow-kt', name: 'arrow-core', version: "${arrowVersion}"
+    
+    //Jackson
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version "${jacksonVersion}"
+
+    //Test
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: "${kotlinVersion}"
+    testCompile group: 'io.mockk', name: 'mockk', version: '1.9'
+
+}
