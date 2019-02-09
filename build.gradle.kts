@@ -3,6 +3,10 @@ plugins {
     kotlin("jvm") version "1.3.21"
 }
 
+application {
+    mainClassName = "com.atinjin.lib.SimplePost"
+}
+
 dependencies {
     compile(kotlin("stdlib"))
     implementation(kotlin("reflect"))
